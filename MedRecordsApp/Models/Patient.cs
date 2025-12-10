@@ -7,6 +7,4 @@ public class Patient
   public DateTime Birthdate { get; set; }
   public string Phone { get; set; }
 
-  // Display property for ComboBox
-  public string DisplayText => $"{PatientID} - {PatientName}";
 }

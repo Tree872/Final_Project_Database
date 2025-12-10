@@ -16,18 +16,11 @@
 
     <!-- Main tab: Models -->
     <TabControl Grid.Row="0" x:Name="ModelTabs">
-      <TabItem Header="Doctors">
-        <views:DoctorsView />
-      </TabItem>
-      <TabItem Header="Diagnoses">
-        <views:DiagnosesView/>
-      </TabItem>
-      <TabItem Header="Patients">
-        <views:PatientsView/>
-      </TabItem>
-      <TabItem Header="Treatments">
-        <views:TreatmentsView/>
-      </TabItem>
+      <TabItem Header="Doctors" x:Name="DoctorsTab"/>
+      <TabItem Header="Patients" x:Name="PatientsTab"/>
+      <TabItem Header="Diagnoses" x:Name="DiagnosesTab"/>
+      <TabItem Header="Treatments" x:Name="TreatmentsTab"/>
+
 
     </TabControl>
   </Grid>

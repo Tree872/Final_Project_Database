@@ -23,7 +23,7 @@
         <StackPanel Grid.Column="0" Margin="5">
           <TextBlock Text="Select Diagnosis:" HorizontalAlignment="Left" Margin="0,0,0,5" FontWeight="Bold"/>
           <ComboBox x:Name="DiagnosisComboBox" Padding="5"
-                              DisplayMemberPath="Conditions" SelectedValuePath="DiagnosisID"
+                              DisplayMemberPath="DiagnosisID" SelectedValuePath="DiagnosisID"
                               SelectionChanged="DiagnosisComboBox_SelectionChanged"/>
         </StackPanel>
 
@@ -55,7 +55,7 @@
           <TextBlock Grid.Row="0" Text="Available Doctors" FontWeight="Bold" Margin="0,0,0,10"/>
           <ListBox x:Name="AvailableDoctorsListBox" Grid.Row="1"
                              SelectionMode="Extended"
-                             DisplayMemberPath="DoctorName"/>
+                             DisplayMemberPath="DoctorID"/>
         </Grid>
       </Border>
 
@@ -78,7 +78,7 @@
           <TextBlock Grid.Row="0" Text="Assigned Doctors" FontWeight="Bold" Margin="0,0,0,10"/>
           <ListBox x:Name="AssignedDoctorsListBox" Grid.Row="1"
                              SelectionMode="Extended"
-                             DisplayMemberPath="DoctorName"/>
+                             DisplayMemberPath="DoctorID"/>
         </Grid>
       </Border>
     </Grid>

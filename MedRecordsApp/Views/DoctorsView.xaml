@@ -133,7 +133,7 @@
 
     <!-- DataGrid -->
     <DataGrid x:Name="DoctorsDataGrid" Grid.Row="1" Margin="10"
-                  AutoGenerateColumns="False" 
+                  AutoGenerateColumns="False"
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   SelectionMode="Single"
@@ -142,9 +142,9 @@
                   HeadersVisibility="Column"
                   SelectionChanged="DoctorsDataGrid_SelectionChanged">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorID}" Width="100"/>
-        <DataGridTextColumn Header="Name" Binding="{Binding DoctorName}" Width="*"/>
-        <DataGridTextColumn Header="Specialization" Binding="{Binding Specialization}" Width="200"/>
+        <DataGridTextColumn Header="ID" Binding="{Binding DoctorID}" Width="50"/>
+        <DataGridTextColumn Header="Doctor Name" Binding="{Binding DoctorName}" Width="*"/>
+        <DataGridTextColumn Header="Specialization" Binding="{Binding Specialization}" Width="*"/>
       </DataGrid.Columns>
     </DataGrid>
   </Grid>

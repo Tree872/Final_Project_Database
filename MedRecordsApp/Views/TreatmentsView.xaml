@@ -31,7 +31,7 @@
           <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
             <TextBlock Text="Patient:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
             <ComboBox x:Name="AddPatientComboBox" Padding="5"
-                                  DisplayMemberPath="PatientName" SelectedValuePath="PatientID"/>
+                                  DisplayMemberPath="PatientID" SelectedValuePath="PatientID"/>
           </StackPanel>
 
           <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
@@ -88,7 +88,7 @@
           <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
             <TextBlock Text="Patient:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
             <ComboBox x:Name="UpdatePatientComboBox" Padding="5"
-                                  DisplayMemberPath="PatientName" SelectedValuePath="PatientID"/>
+                                  DisplayMemberPath="PatientID" SelectedValuePath="PatientID"/>
           </StackPanel>
 
           <!-- Row 2 -->
@@ -177,7 +177,7 @@
 
     <!-- DataGrid -->
     <DataGrid x:Name="TreatmentsDataGrid" Grid.Row="1" Margin="10"
-                  AutoGenerateColumns="False" 
+                  AutoGenerateColumns="False"
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   SelectionMode="Single"
@@ -186,12 +186,16 @@
                   HeadersVisibility="Column"
                   SelectionChanged="TreatmentsDataGrid_SelectionChanged">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Treatment ID" Binding="{Binding TreatmentID}" Width="100"/>
+        <DataGridTextColumn Header="ID" Binding="{Binding TreatmentID}" Width="50"/>
         <DataGridTextColumn Header="Patient" Binding="{Binding PatientName}" Width="150"/>
         <DataGridTextColumn Header="Description" Binding="{Binding TreatmentDescription}" Width="*"/>
-        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='yyyy-MM-dd'}" Width="100"/>
-        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="90"/>
-        <DataGridTextColumn Header="Doctors" Binding="{Binding DoctorNames}" Width="200"/>
+
+        <DataGridTextColumn Header="Start Date" 
+                            Binding="{Binding StartDate, StringFormat={}{0:yyyy-MM-dd}}" 
+                            Width="100"/>
+
+        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+        <DataGridTextColumn Header="Assigned Doctors" Binding="{Binding DoctorsList}" Width="*"/>
       </DataGrid.Columns>
     </DataGrid>
   </Grid>

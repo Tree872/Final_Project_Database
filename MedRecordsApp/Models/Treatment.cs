@@ -8,6 +8,4 @@ public class Treatment
   public DateTime StartDate { get; set; }
   public string Status { get; set; }
 
-  // Display property for ComboBox
-  public string DisplayText => $"{TreatmentID} - {TreatmentDescription}";
 }
