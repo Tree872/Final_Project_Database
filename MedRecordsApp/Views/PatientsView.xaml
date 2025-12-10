@@ -117,32 +117,7 @@
                             Click="DeleteButton_Click"/>
         </Grid>
       </TabItem>
-
-      <!-- Search Tab -->
-      <TabItem Header="Search">
-        <Grid Margin="20">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-          </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-          </Grid.ColumnDefinitions>
-
-          <StackPanel Grid.Row="0" Grid.Column="0" Margin="5" Grid.ColumnSpan="2" >
-            <TextBlock Text="Search Term:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
-            <TextBox x:Name="SearchTextBox" Padding="5"/>
-          </StackPanel>
-
-          <Button x:Name="SearchButton" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                            Content="Search" Width="120" Height="35" 
-                            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
-                            Click="SearchButton_Click"/>
-        </Grid>
-      </TabItem>
     </TabControl>
-
     <!-- DataGrid -->
     <DataGrid x:Name="PatientsDataGrid" Grid.Row="1" Margin="10"
                   AutoGenerateColumns="False" 

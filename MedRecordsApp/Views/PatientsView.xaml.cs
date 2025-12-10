@@ -46,6 +46,12 @@ namespace MedRecordsApp.Views
         MessageBox.Show("Phone is required.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
         return;
       }
+      if (!System.Text.RegularExpressions.Regex.IsMatch(AddPhoneTextBox.Text, @"^\d{8,12}$"))
+      {
+        MessageBox.Show("Phone must contain only digits and be 8 to 12 digits long.",
+                        "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+        return;
+      }
 
       var patient = new Patient
       {
@@ -88,6 +94,13 @@ namespace MedRecordsApp.Views
       if (string.IsNullOrWhiteSpace(UpdatePhoneTextBox.Text))
       {
         MessageBox.Show("Phone is required.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+        return;
+      }
+
+      if (!System.Text.RegularExpressions.Regex.IsMatch(UpdatePhoneTextBox.Text, @"^\d{8,12}$"))
+      {
+        MessageBox.Show("Phone must contain only digits and be 8 to 12 digits long.",
+                        "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
         return;
       }
 
@@ -134,25 +147,6 @@ namespace MedRecordsApp.Views
 
       DeletePatientIDComboBox.SelectedIndex = -1;
       LoadComboBoxes();
-    }
-
-    private void SearchButton_Click(object sender, RoutedEventArgs e)
-    {
-      string searchTerm = SearchTextBox.Text.Trim().ToLower();
-
-      if (string.IsNullOrWhiteSpace(searchTerm))
-      {
-        PatientsDataGrid.ItemsSource = _dataManager.PatientsTable.DefaultView;
-        return;
-      }
-
-      var filteredView = _dataManager.PatientsTable.AsEnumerable()
-          .Where(row =>
-              row["PatientName"].ToString().ToLower().Contains(searchTerm) ||
-              row["Phone"].ToString().ToLower().Contains(searchTerm))
-          .CopyToDataTable();
-
-      PatientsDataGrid.ItemsSource = filteredView.DefaultView;
     }
 
     private void PatientsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

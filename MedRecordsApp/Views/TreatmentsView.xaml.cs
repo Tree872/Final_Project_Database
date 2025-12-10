@@ -153,34 +153,6 @@ namespace MedRecordsApp.Views
       LoadComboBoxes();
     }
 
-    private void SearchButton_Click(object sender, RoutedEventArgs e)
-    {
-      string searchTerm = SearchTextBox.Text.Trim().ToLower();
-
-      if (string.IsNullOrWhiteSpace(searchTerm))
-      {
-        TreatmentsDataGrid.ItemsSource = _dataManager.TreatmentsViewTable.DefaultView;
-        return;
-      }
-
-      var filteredRows = _dataManager.TreatmentsViewTable.AsEnumerable()
-          .Where(row =>
-              row["PatientName"].ToString().ToLower().Contains(searchTerm) ||
-              row["TreatmentDescription"].ToString().ToLower().Contains(searchTerm) ||
-              row["Status"].ToString().ToLower().Contains(searchTerm))
-          .ToList();
-
-      if (filteredRows.Any())
-      {
-        var filteredView = filteredRows.CopyToDataTable();
-        TreatmentsDataGrid.ItemsSource = filteredView.DefaultView;
-      }
-      else
-      {
-        TreatmentsDataGrid.ItemsSource = null;
-      }
-    }
-
     private void TreatmentsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       if (TreatmentsDataGrid.SelectedItem is DataRowView selectedRow)

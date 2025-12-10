@@ -122,33 +122,6 @@ namespace MedRecordsApp.Views
       LoadComboBoxes();
     }
 
-    private void SearchButton_Click(object sender, RoutedEventArgs e)
-    {
-      string searchTerm = SearchTextBox.Text.Trim().ToLower();
-
-      if (string.IsNullOrWhiteSpace(searchTerm))
-      {
-        DoctorsDataGrid.ItemsSource = _dataManager.DoctorsTable.DefaultView;
-        return;
-      }
-
-      var filteredRows = _dataManager.DoctorsTable.AsEnumerable()
-          .Where(row =>
-              row["DoctorName"].ToString().ToLower().Contains(searchTerm) ||
-              row["Specialization"].ToString().ToLower().Contains(searchTerm))
-          .ToList();
-
-      if (filteredRows.Any())
-      {
-        var filteredView = filteredRows.CopyToDataTable();
-        DoctorsDataGrid.ItemsSource = filteredView.DefaultView;
-      }
-      else
-      {
-        DoctorsDataGrid.ItemsSource = null;
-      }
-    }
-
     private void DoctorsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       if (DoctorsDataGrid.SelectedItem is DataRowView selectedRow)
