@@ -19,13 +19,22 @@ namespace MedRecordsApp;
 /// </summary>
 public partial class MainWindow : Window
 {
+  private const string CONNECTION_STRING = "server=localhost;uid=root;pwd=1234";
   private DataManager _dm;
+
 
   public MainWindow()
   {
     InitializeComponent();
-
-    _dm = new DataManager();
+    try
+    {
+      _dm = new DataManager(CONNECTION_STRING);
+    }
+    catch (Exception ex)
+    {
+      MessageBox.Show(ex.Message);
+      return;
+    }
 
     // Inject DataManager into each view
     DoctorsTab.Content = new DoctorsView(_dm);

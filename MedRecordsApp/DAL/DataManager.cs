@@ -1,13 +1,14 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MedRecordsApp.Models;
+using MySql.Data.MySqlClient;
 using System.Data;
-using MedRecordsApp.Models;
+using System.Xml.Schema;
 
 namespace MedRecordsApp.DAL
 {
   public class DataManager
   {
-    private const string CONNECTION_STRING = "server=localhost;uid=root;pwd=1234;database=emr_db";
-    private readonly string connectionString;
+    
+    private string connectionString;
 
     // Normalized in-memory tables
     public DataTable PatientsTable { get; private set; }
@@ -21,25 +22,45 @@ namespace MedRecordsApp.DAL
     public DataTable DiagnosesViewTable { get; private set; }
     public DataTable TreatmentsViewTable { get; private set; }
 
-    public DataManager()
+    public DataManager(string connectionString)
     {
-      connectionString = CONNECTION_STRING;
+      try
 
-      using var connection = new MySqlConnection(connectionString);
-      connection.Open();
+      {
+        this.connectionString = connectionString;
+        using (var connection = new MySqlConnection(this.connectionString))
+        {
+          connection.Open();
+          // Init database
+          var createDbCommand = new MySqlCommand("CREATE DATABASE IF NOT EXISTS EMR_DB;", connection);
+          createDbCommand.ExecuteNonQuery();
 
-      // Load all normalized tables
-      PatientsTable = PatientsHelper.GetAll(connection).Table;
-      DoctorsTable = DoctorsHelper.GetAll(connection).Table;
-      DiagnosesTable = DiagnosesHelper.GetAll(connection).Table;
-      TreatmentsTable = TreatmentsHelper.GetAll(connection).Table;
+        }
+        this.connectionString = connectionString + ";Database=EMR_DB;";
+        using (var connection = new MySqlConnection(this.connectionString))
+        {
+          connection.Open();
+          // Init tables
+          var command = new MySqlCommand(SqlSchema.TablesInitializationScript, connection);
+          command.ExecuteNonQuery();
+          // Load all normalized tables
+          PatientsTable = PatientsHelper.GetAll(connection).Table;
+          DoctorsTable = DoctorsHelper.GetAll(connection).Table;
+          DiagnosesTable = DiagnosesHelper.GetAll(connection).Table;
+          TreatmentsTable = TreatmentsHelper.GetAll(connection).Table;
 
-      DiagnosesDoctorsTable = DiagnosesDoctorsHelper.GetAll(connection).Table;
-      TreatmentDoctorsTable = TreatmentDoctorsHelper.GetAll(connection).Table;
+          DiagnosesDoctorsTable = DiagnosesDoctorsHelper.GetAll(connection).Table;
+          TreatmentDoctorsTable = TreatmentDoctorsHelper.GetAll(connection).Table;
 
-      // Build UI view tables (in memory)
-      BuildDiagnosesView();
-      BuildTreatmentsView();
+          // Build UI view tables (in memory)
+          BuildDiagnosesView();
+          BuildTreatmentsView();
+        }
+      }
+      catch (Exception ex)
+      {
+        throw new Exception(ex.Message);
+      }
     }
 
     private MySqlConnection OpenConnection()
