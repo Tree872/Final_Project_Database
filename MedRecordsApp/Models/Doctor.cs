@@ -3,6 +3,6 @@
 public class Doctor
 {
   public int DoctorID { get; set; }
-  public string DoctorName { get; set; }
-  public string Specialization { get; set; }
+  public required string DoctorName { get; set; }
+  public required string Specialization { get; set; }
 }
