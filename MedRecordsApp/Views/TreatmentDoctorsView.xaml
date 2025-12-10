@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="MedRecordsApp.Views.TreatmentDoctorsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Treatment Selection -->
+    <Border Grid.Row="0" Padding="15" Margin="10" BorderBrush="#CCCCCC" BorderThickness="1">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="5">
+          <TextBlock Text="Select Treatment:" HorizontalAlignment="Left" Margin="0,0,0,5" FontWeight="Bold"/>
+          <ComboBox x:Name="TreatmentComboBox" Padding="5"
+                              DisplayMemberPath="TreatmentDescription" SelectedValuePath="TreatmentID"
+                              SelectionChanged="TreatmentComboBox_SelectionChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="5" VerticalAlignment="Center">
+          <TextBlock x:Name="TreatmentDetailsTextBlock" 
+                               TextWrapping="Wrap" 
+                               Foreground="#666666"
+                               Text="Select a treatment to manage its doctors"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- Two Column Layout: Available Doctors and Assigned Doctors -->
+    <Grid Grid.Row="1" Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- Available Doctors -->
+      <Border Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="1" Padding="10">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <TextBlock Grid.Row="0" Text="Available Doctors" FontWeight="Bold" Margin="0,0,0,10"/>
+          <ListBox x:Name="AvailableDoctorsListBox" Grid.Row="1"
+                             SelectionMode="Extended"
+                             DisplayMemberPath="DoctorName"/>
+        </Grid>
+      </Border>
+
+      <!-- Add/Remove Buttons -->
+      <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10">
+        <Button x:Name="AddDoctorButton" Content="Add →" Width="100" Height="35" Margin="0,0,0,10"
+                        Click="AddDoctorButton_Click"/>
+        <Button x:Name="RemoveDoctorButton" Content="← Remove" Width="100" Height="35"
+                        Click="RemoveDoctorButton_Click"/>
+      </StackPanel>
+
+      <!-- Assigned Doctors -->
+      <Border Grid.Column="2" BorderBrush="#CCCCCC" BorderThickness="1" Padding="10">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <TextBlock Grid.Row="0" Text="Assigned Doctors" FontWeight="Bold" Margin="0,0,0,10"/>
+          <ListBox x:Name="AssignedDoctorsListBox" Grid.Row="1"
+                             SelectionMode="Extended"
+                             DisplayMemberPath="DoctorName"/>
+        </Grid>
+      </Border>
+    </Grid>
+
+    <!-- Action Buttons -->
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+    </StackPanel>
+  </Grid>
+</UserControl>

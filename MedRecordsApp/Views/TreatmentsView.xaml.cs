@@ -11,8 +11,7 @@ namespace MedRecordsApp.Views
     public TreatmentsView()
     {
       InitializeComponent();
-      LoadTreatments();
-      LoadDiagnoses();
+      TreatmentDoctorsFrame.Content = new TreatmentDoctorsView();
     }
 
     private void AddSaveButton_Click(object sender, RoutedEventArgs e)
@@ -53,18 +52,6 @@ namespace MedRecordsApp.Views
     {
       // TODO: Get selected treatment
       // TODO: Populate Update tab fields with selected treatment data
-    }
-
-    private void LoadTreatments()
-    {
-      // TODO: Query database for all treatments
-      // TODO: Bind results to DataGrid
-    }
-
-    private void LoadDiagnoses()
-    {
-      // TODO: Query database for all diagnoses
-      // TODO: Bind results to Diagnosis ComboBoxes
     }
   }
 }

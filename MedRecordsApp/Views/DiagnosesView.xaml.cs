@@ -11,8 +11,9 @@ namespace MedRecordsApp.Views
     public DiagnosesView()
     {
       InitializeComponent();
-      LoadDiagnoses();
-      LoadAppointments();
+
+      // Load the DiagnosisDoctorsView into the Frame
+      DiagnosisDoctorsFrame.Content = new DiagnosisDoctorsView();
     }
 
     private void AddSaveButton_Click(object sender, RoutedEventArgs e)
@@ -22,6 +23,7 @@ namespace MedRecordsApp.Views
       // TODO: Insert into database
       // TODO: Refresh DataGrid
       // TODO: Clear form fields
+      // NOTE: Doctors are managed separately in the "Manage Doctors" tab
     }
 
     private void UpdateSaveButton_Click(object sender, RoutedEventArgs e)
@@ -31,13 +33,14 @@ namespace MedRecordsApp.Views
       // TODO: Update database record
       // TODO: Refresh DataGrid
       // TODO: Clear form fields
+      // NOTE: Doctors are managed separately in the "Manage Doctors" tab
     }
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
       // TODO: Validate Diagnosis ID
       // TODO: Confirm deletion with user
-      // TODO: Delete from database
+      // TODO: Delete from database (CASCADE will delete related DiagnosesDoctors)
       // TODO: Refresh DataGrid
       // TODO: Clear form fields
     }
@@ -53,18 +56,6 @@ namespace MedRecordsApp.Views
     {
       // TODO: Get selected diagnosis
       // TODO: Populate Update tab fields with selected diagnosis data
-    }
-
-    private void LoadDiagnoses()
-    {
-      // TODO: Query database for all diagnoses
-      // TODO: Bind results to DataGrid
-    }
-
-    private void LoadAppointments()
-    {
-      // TODO: Query database for all appointments
-      // TODO: Bind results to Appointment ComboBoxes
     }
   }
 }

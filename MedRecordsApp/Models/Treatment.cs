@@ -3,7 +3,11 @@
 public class Treatment
 {
   public int TreatmentID { get; set; }
-  public int DiagnosisID { get; set; }
-  public required string TreatmentDescription { get; set; }
+  public int PatientID { get; set; }
+  public string TreatmentDescription { get; set; }
   public DateTime StartDate { get; set; }
+  public string Status { get; set; }
+
+  // Display property for ComboBox
+  public string DisplayText => $"{TreatmentID} - {TreatmentDescription}";
 }

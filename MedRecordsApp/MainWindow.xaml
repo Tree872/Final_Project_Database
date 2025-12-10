@@ -19,9 +19,6 @@
       <TabItem Header="Doctors">
         <views:DoctorsView />
       </TabItem>
-      <TabItem Header="Appointments">
-        <views:AppointmentsView/>
-      </TabItem>
       <TabItem Header="Diagnoses">
         <views:DiagnosesView/>
       </TabItem>

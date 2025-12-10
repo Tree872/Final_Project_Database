@@ -19,6 +19,7 @@
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
           </Grid.RowDefinitions>
           <Grid.ColumnDefinitions>
@@ -28,9 +29,9 @@
 
           <!-- Row 1 -->
           <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
-            <TextBlock Text="Diagnosis:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
-            <ComboBox x:Name="AddDiagnosisComboBox" Padding="5"
-                                  DisplayMemberPath="DiagnosisID" SelectedValuePath="DiagnosisID"/>
+            <TextBlock Text="Patient:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
+            <ComboBox x:Name="AddPatientComboBox" Padding="5"
+                                  DisplayMemberPath="PatientName" SelectedValuePath="PatientID"/>
           </StackPanel>
 
           <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
@@ -39,13 +40,23 @@
           </StackPanel>
 
           <!-- Row 2 -->
-          <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+          <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+            <TextBlock Text="Status:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
+            <ComboBox x:Name="AddStatusComboBox" Padding="5" SelectedIndex="0">
+              <ComboBoxItem Content="Active"/>
+              <ComboBoxItem Content="Completed"/>
+              <ComboBoxItem Content="Cancelled"/>
+            </ComboBox>
+          </StackPanel>
+
+          <!-- Row 3 -->
+          <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
             <TextBlock Text="Description:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
             <TextBox x:Name="AddDescriptionTextBox" Padding="5" 
                                  TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
           </StackPanel>
 
-          <Button x:Name="AddSaveButton" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+          <Button x:Name="AddSaveButton" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                             Content="Save" Width="120" Height="35" 
                             HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
                             Click="AddSaveButton_Click"/>
@@ -56,6 +67,7 @@
       <TabItem Header="Update">
         <Grid Margin="20">
           <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -74,15 +86,24 @@
           </StackPanel>
 
           <StackPanel Grid.Row="0" Grid.Column="1" Margin="5">
-            <TextBlock Text="Diagnosis:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
-            <ComboBox x:Name="UpdateDiagnosisComboBox" Padding="5"
-                                  DisplayMemberPath="DiagnosisID" SelectedValuePath="DiagnosisID"/>
+            <TextBlock Text="Patient:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
+            <ComboBox x:Name="UpdatePatientComboBox" Padding="5"
+                                  DisplayMemberPath="PatientName" SelectedValuePath="PatientID"/>
           </StackPanel>
 
           <!-- Row 2 -->
-          <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+          <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
             <TextBlock Text="Start Date:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
             <DatePicker x:Name="UpdateStartDatePicker" Padding="5"/>
+          </StackPanel>
+
+          <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+            <TextBlock Text="Status:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
+            <ComboBox x:Name="UpdateStatusComboBox" Padding="5">
+              <ComboBoxItem Content="Active"/>
+              <ComboBoxItem Content="Completed"/>
+              <ComboBoxItem Content="Cancelled"/>
+            </ComboBox>
           </StackPanel>
 
           <!-- Row 3 -->
@@ -92,7 +113,7 @@
                                  TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
           </StackPanel>
 
-          <Button x:Name="UpdateSaveButton" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+          <Button x:Name="UpdateSaveButton" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
                             Content="Update" Width="120" Height="35" 
                             HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
                             Click="UpdateSaveButton_Click"/>
@@ -111,7 +132,7 @@
             <ColumnDefinition Width="*"/>
           </Grid.ColumnDefinitions>
 
-          <StackPanel Grid.Row="0" Grid.Column="0" Margin="5" Grid.ColumnSpan="2" >
+          <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
             <TextBlock Text="Treatment ID:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
             <ComboBox x:Name="DeleteTreatmentIDComboBox" Padding="5"
                                   DisplayMemberPath="TreatmentID" SelectedValuePath="TreatmentID"/>
@@ -136,7 +157,7 @@
             <ColumnDefinition Width="*"/>
           </Grid.ColumnDefinitions>
 
-          <StackPanel Grid.Row="0" Grid.Column="0" Margin="5" Grid.ColumnSpan="2" >
+          <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
             <TextBlock Text="Search Term:" HorizontalAlignment="Left" Margin="0,0,0,5"/>
             <TextBox x:Name="SearchTextBox" Padding="5"/>
           </StackPanel>
@@ -146,6 +167,11 @@
                             HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
                             Click="SearchButton_Click"/>
         </Grid>
+      </TabItem>
+
+      <!-- Manage Doctors Tab -->
+      <TabItem Header="Manage Doctors">
+        <Frame x:Name="TreatmentDoctorsFrame" NavigationUIVisibility="Hidden"/>
       </TabItem>
     </TabControl>
 
@@ -160,10 +186,12 @@
                   HeadersVisibility="Column"
                   SelectionChanged="TreatmentsDataGrid_SelectionChanged">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Treatment ID" Binding="{Binding TreatmentID}" Width="110"/>
-        <DataGridTextColumn Header="Diagnosis ID" Binding="{Binding DiagnosisID}" Width="110"/>
+        <DataGridTextColumn Header="Treatment ID" Binding="{Binding TreatmentID}" Width="100"/>
+        <DataGridTextColumn Header="Patient" Binding="{Binding PatientName}" Width="150"/>
         <DataGridTextColumn Header="Description" Binding="{Binding TreatmentDescription}" Width="*"/>
-        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='yyyy-MM-dd'}" Width="120"/>
+        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='yyyy-MM-dd'}" Width="100"/>
+        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="90"/>
+        <DataGridTextColumn Header="Doctors" Binding="{Binding DoctorNames}" Width="200"/>
       </DataGrid.Columns>
     </DataGrid>
   </Grid>

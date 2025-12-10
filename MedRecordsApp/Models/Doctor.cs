@@ -1,8 +1,11 @@
-﻿namespace YourApp.Models;
+﻿namespace MedRecordsApp.Models;
 
 public class Doctor
 {
   public int DoctorID { get; set; }
-  public required string DoctorName { get; set; }
-  public required string Specialization { get; set; }
+  public string DoctorName { get; set; }
+  public string Specialization { get; set; }
+
+  // Display property for ComboBox
+  public string DisplayText => $"{DoctorID} - {DoctorName} ({Specialization})";
 }
